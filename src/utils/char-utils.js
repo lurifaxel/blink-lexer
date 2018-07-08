@@ -28,3 +28,8 @@ export function isNumber(char) {
 export function getNumber(str) {
   if (str[0] == "0") return "0";
 }
+
+export function isDigit(char) {
+  const result = char >= "0" && char <= "9";
+  return result;
+}

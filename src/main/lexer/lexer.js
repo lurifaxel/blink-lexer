@@ -3,9 +3,9 @@ import { TokenType } from "./tokentype";
 import {
   isNewLine,
   isWhitespaceOrNewLine,
-  lookAhead,
-  isNumber
+  lookAhead
 } from "./../../utils/char-utils";
+import { integerFsm } from "./../finite-state-machine/integer-fsm";
 
 export class Lexer {
   constructor(input) {
@@ -47,7 +47,7 @@ export class Lexer {
       return new Token(TokenType.Newline, nextFour, this.line, this.column);
     }
 
-    if (isNumber(currentChar)) {
+    if (integerFsm.run(currentChar).parsedInput.length === 1) {
       return new Token(TokenType.Integer, currentChar, this.line, this.column);
     }
 
